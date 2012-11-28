@@ -1,27 +1,19 @@
 package com.craftminecraft.bansync;
 
-import java.util.logging.Logger;
-
-import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.griefcraft.lwc.LWC;
-import com.griefcraft.lwc.LWCPlugin;
-//import com.worldcretornica.plotme.PlotMe;
+import com.craftminecraft.bansync.log.Logger;
+import com.craftminecraft.bansync.plugins.LWCPluginHook;
 
 public class BanSync extends JavaPlugin implements Listener {
-	Logger Log = Logger.getLogger("Minecraft");
-	private LWCPlugin pluginLWC;
-	private Boolean hookedLWC = false;
-	//private PlotMe pluginPlotMe;
-	private Boolean hookedPlotMe = false;
+	public Logger logger = new Logger(this);
+	private LWCPluginHook lwcplugin;
+	
 	
     public void onDisable() {
         // TODO: Place any custom disable code here.
@@ -31,8 +23,7 @@ public class BanSync extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
         
         // Hook into plugins
-        hookLWC();
-        //hookPlotMe();
+        hookPlugins();
         
     }
 
@@ -57,36 +48,26 @@ public class BanSync extends JavaPlugin implements Listener {
     	
     	if (PlayerBanned)
     	{
-    		// Player is banned, lets delete the locks
-    		if (hookedLWC)
-    		{
-    			// Delete Player LWC Locks
-    			deleteLWC(kickedplayer.getName());
-    		}
+    		// Clear LWC Locks
+    		if (lwcplugin.isHooked())
+    			lwcplugin.ClearLWCLocks(kickedplayer.getName());
     		
-    		if (hookedPlotMe)
-    		{
-    			// Delete Player Plots
-    			deletePlotMe();
-    		}
+    		// Delete PlotMe Plots
+    		
     	}
     }
     
-    private void hookLWC() {
-    	Plugin p = this.getServer().getPluginManager().getPlugin("LWC");
-    	if (p != null && p instanceof LWCPlugin) {
-    		pluginLWC = (LWCPlugin) p;
-    		Log.info("[BanSync] LWC was found, hooked into LWC");
-    		hookedLWC = true;
-    	} else {
-    		Log.info("[BanSync] LWC was not found");
-    	}
+    private void hookPlugins() {
+    	// Hook LWC
+    	lwcplugin = new LWCPluginHook(this);
+    	lwcplugin.HookLWC();
+
+    	// Hook PlotMe
     }
-    
+        
     //private void hookPlotMe() {
     //	Plugin p = this.getServer().getPluginManager().getPlugin("PlotMe");
     //	if (p != null && p instanceof PlotMe) {
-    //		pluginPlotMe = (PlotMe) p;
     //		Log.info("[BanSync] PlotMe was found, hooked into PlotMe");
     //		hookedPlotMe = true;
     //	} else {
@@ -94,14 +75,38 @@ public class BanSync extends JavaPlugin implements Listener {
     //	}
     //}
     
-    private void deleteLWC(String toRemove) {
-    	LWC lwc = pluginLWC.getLWC();
-    	CommandSender sender = Bukkit.getConsoleSender();
-    	lwc.fastRemoveProtectionsByPlayer(sender, toRemove, false);
-    }
-    
-    private void deletePlotMe() {
-    	
-    }
+    //private void deletePlotMe(String toRemove) {    	
+    //	Log.info("[BanSync] Attempting to remove PlotMe Properties");
+    	//for (World w : getServer().getWorlds())
+    	//{
+    //	World w = getServer().getWorld("world");
+    //		HashMap<String, Plot> plots = PlotManager.getPlots(w);
+    //		if (!plots.isEmpty())
+    //		{
+    //			for(String id : plots.keySet())
+    //			{
+    //				Plot plot = plots.get(id);
+
+    //				Log.info("[BanSync - Debug] Found Plot " + plot.id + " Owner: " + plot.owner);
+    				
+    //				if (plot.owner == toRemove)
+    //				{
+    //					Log.info("[BanSync] Found a plot, removing it");
+    //					String plotID = plot.id;
+    				
+    					//Location bottom = PlotManager.getPlotBottomLoc(w, plotID);
+						//Location top = PlotManager.getPlotTopLoc(w, plotID);
+
+						//PlotManager.clear(bottom, top);
+    					
+    //					PlotManager.removeOwnerSign(w, plotID);
+    //					PlotManager.removeSellSign(w, plotID);
+    				
+    //					SqlManager.deletePlot(PlotManager.getIdX(plotID), PlotManager.getIdZ(plotID), w.getName().toLowerCase());
+    //				}
+    //			}
+    //		}
+    	//}
+    //}
 }
 
