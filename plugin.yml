@@ -1,9 +1,15 @@
+name: BanSync
 author: FireBall1725
+url: http://www.craftminecraft.com/
+
+version: 1.0
+main: com.craftminecraft.bansync.BanSync
+
 database: false
 description: Sync player bans to other plugins, such as LWC and PlotMe.
-generator: http://dinnerbone.com/minecraft/tools/pluginator/
-main: com.craftminecraft.bansync.BanSync
-name: BanSync
+
 startup: startup
-url: http://www.craftminecraft.com/
-version: 1.0
+
+softdepend: [Vault, PlotMe, LWC]
+
+

@@ -9,14 +9,18 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.craftminecraft.bansync.log.Logger;
 import com.craftminecraft.bansync.plugins.LWCPluginHook;
+import com.craftminecraft.bansync.plugins.PlotMePluginHook;
+import com.craftminecraft.bansync.plugins.VaultPluginHook;
 
 public class BanSync extends JavaPlugin implements Listener {
 	public Logger logger = new Logger(this);
 	private LWCPluginHook lwcplugin;
-	
+	private PlotMePluginHook plotmeplugin;
+	private VaultPluginHook vaultplugin;
 	
     public void onDisable() {
-        // TODO: Place any custom disable code here.
+        lwcplugin = null;
+        plotmeplugin = null;
     }
 
     public void onEnable() {
@@ -53,7 +57,12 @@ public class BanSync extends JavaPlugin implements Listener {
     			lwcplugin.ClearLWCLocks(kickedplayer.getName());
     		
     		// Delete PlotMe Plots
+    		if (plotmeplugin.isHooked())
+    			plotmeplugin.ClearPlotMePlots(kickedplayer.getName());
     		
+    		// Delete Players Economy
+    		if (vaultplugin.isHooked())
+    			vaultplugin.ClearEconomy(kickedplayer.getName());
     	}
     }
     
@@ -63,50 +72,12 @@ public class BanSync extends JavaPlugin implements Listener {
     	lwcplugin.HookLWC();
 
     	// Hook PlotMe
+    	plotmeplugin = new PlotMePluginHook(this);
+    	plotmeplugin.HookPlotMe();
+    	
+    	// Hook Econony
+    	vaultplugin = new VaultPluginHook(this);
+    	vaultplugin.HookVault();
     }
-        
-    //private void hookPlotMe() {
-    //	Plugin p = this.getServer().getPluginManager().getPlugin("PlotMe");
-    //	if (p != null && p instanceof PlotMe) {
-    //		Log.info("[BanSync] PlotMe was found, hooked into PlotMe");
-    //		hookedPlotMe = true;
-    //	} else {
-    //		Log.info("[BanSync] PlotMe was not found");
-    //	}
-    //}
-    
-    //private void deletePlotMe(String toRemove) {    	
-    //	Log.info("[BanSync] Attempting to remove PlotMe Properties");
-    	//for (World w : getServer().getWorlds())
-    	//{
-    //	World w = getServer().getWorld("world");
-    //		HashMap<String, Plot> plots = PlotManager.getPlots(w);
-    //		if (!plots.isEmpty())
-    //		{
-    //			for(String id : plots.keySet())
-    //			{
-    //				Plot plot = plots.get(id);
-
-    //				Log.info("[BanSync - Debug] Found Plot " + plot.id + " Owner: " + plot.owner);
-    				
-    //				if (plot.owner == toRemove)
-    //				{
-    //					Log.info("[BanSync] Found a plot, removing it");
-    //					String plotID = plot.id;
-    				
-    					//Location bottom = PlotManager.getPlotBottomLoc(w, plotID);
-						//Location top = PlotManager.getPlotTopLoc(w, plotID);
-
-						//PlotManager.clear(bottom, top);
-    					
-    //					PlotManager.removeOwnerSign(w, plotID);
-    //					PlotManager.removeSellSign(w, plotID);
-    				
-    //					SqlManager.deletePlot(PlotManager.getIdX(plotID), PlotManager.getIdZ(plotID), w.getName().toLowerCase());
-    //				}
-    //			}
-    //		}
-    	//}
-    //}
 }
 

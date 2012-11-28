@@ -10,6 +10,10 @@
 			<id>bukkit-repo</id>
 			<url>http://repo.bukkit.org/content/groups/public/</url>
 		</repository>
+		<repository>
+			<id>vault-repo</id>
+			<url>http://ci.herocraftonline.com/plugin/repository/everything</url>
+		</repository>
   	</repositories>
     <build>
         <plugins>
@@ -48,5 +52,12 @@
         	<optional>true</optional>
         	<systemPath>${project.basedir}/lib/PlotMe-0.10b.jar</systemPath>
         </dependency>
+        <dependency>
+		    <groupId>net.milkbowl.vault</groupId>
+            <artifactId>Vault</artifactId>
+            <version>1.2.20-SNAPSHOT</version>
+            <optional>true</optional>
+            <scope>provided</scope>
+		</dependency>
     </dependencies>
 </project>

@@ -9,21 +9,36 @@ After you ban a user, what then?  Now you have to go around and remove the locks
 
 ## Supported Plugins
 ### LWC
-* Removes Locks players have made
+* Removes Locks that the player made
+### PlotMe
+* Removes Plots that the player made
+### Vault
+* Drains the players bank account to $0.00
+* Deletes the account if supported by your economy
 
 ## Future Plans
 * Add configuration file with configuration options
 * Add support for other Plugins
-	* PlotMe
 	* Lockette
 	* Towny
-	* Vault / Economy
+	* Chest Shop
+	* Citizens / Citizens 2 / NPCs
+	* CitiTrader
+	* World Guard (Regions)
+	* Essentials (Delete users settings, items in hand, homes, etc)
+	* Please suggest more plugins that you would like support added too...
 * Timeout before sync happens
 
 ## Source Code
-Will post the source code to GitHub shortly
+[https://github.com/CraftMinecraft/BanSync](https://github.com/CraftMinecraft/BanSync)
 
 ## Change Log
+### Version 0.03
+* Added support for Vault for Economy
+
+### Version 0.02
+* Added support for PlotMe
+
 ### Version 0.01
 * First stable Alpha Release of the plugin
 * Supports LWC and the Vanilla Ban System
