@@ -16,6 +16,14 @@ After you ban a user, what then?  Now you have to go around and remove the locks
 * Drains the players bank account to $0.00
 * Deletes the account if supported by your economy
 
+## Commands
+### /bansync removeuser {username}
+Manually remove the user
+
+## Permissions
+### bansync.removeuser
+Allows the user to run /bansync removeuser, Defaults to op
+
 ## Future Plans
 * Add configuration file with configuration options
 * Add support for other Plugins
@@ -33,6 +41,13 @@ After you ban a user, what then?  Now you have to go around and remove the locks
 [https://github.com/CraftMinecraft/BanSync](https://github.com/CraftMinecraft/BanSync)
 
 ## Change Log
+### Version 0.05
+* Moved project to Beta status
+* Added command /bansync help
+
+### Version 0.04
+* Added command /bansync removeuser
+
 ### Version 0.03
 * Added support for Vault for Economy
 

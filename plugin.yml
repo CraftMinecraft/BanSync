@@ -16,6 +16,12 @@ commands:
    bansync:
       description: Main command for BanSync.
       usage: /<command> help
+   bansync removeuser:
+      description: Manually remove user.
+      usage: /<command> <username>
+   bansync help:
+      description: Bansync Help
+      usage: /<command> help
       
 permissions:
    bansync.removeuser:

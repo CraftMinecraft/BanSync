@@ -10,6 +10,8 @@ import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.craftminecraft.bansync.command.CommandManager;
+import com.craftminecraft.bansync.command.commands.DefaultCommand;
+import com.craftminecraft.bansync.command.commands.HelpCommand;
 import com.craftminecraft.bansync.command.commands.RemoveUserCommand;
 import com.craftminecraft.bansync.log.Logger;
 import com.craftminecraft.bansync.plugins.LWCPluginHook;
@@ -91,6 +93,8 @@ public class BanSync extends JavaPlugin implements Listener {
     private void registerCommands() {
     	commandManager = new CommandManager();
         // Load Commands
+    	commandManager.addCommand(new DefaultCommand(this));
+    	commandManager.addCommand(new HelpCommand(this));
         commandManager.addCommand(new RemoveUserCommand(this));
     }
     
