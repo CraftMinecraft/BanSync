@@ -1,12 +1,16 @@
 package com.craftminecraft.bansync;
 
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.craftminecraft.bansync.command.CommandManager;
+import com.craftminecraft.bansync.command.commands.RemoveUserCommand;
 import com.craftminecraft.bansync.log.Logger;
 import com.craftminecraft.bansync.plugins.LWCPluginHook;
 import com.craftminecraft.bansync.plugins.PlotMePluginHook;
@@ -17,6 +21,7 @@ public class BanSync extends JavaPlugin implements Listener {
 	private LWCPluginHook lwcplugin;
 	private PlotMePluginHook plotmeplugin;
 	private VaultPluginHook vaultplugin;
+	private CommandManager commandManager;
 	
     public void onDisable() {
         lwcplugin = null;
@@ -26,14 +31,13 @@ public class BanSync extends JavaPlugin implements Listener {
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this, this);
         
-        // Hook into plugins
         hookPlugins();
-        
+        registerCommands();
     }
-
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        event.getPlayer().sendMessage("Welcome, " + event.getPlayer().getDisplayName() + "!");
+    
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        return commandManager.dispatch(sender, command, label, args, this);
     }
     
     @EventHandler
@@ -52,18 +56,22 @@ public class BanSync extends JavaPlugin implements Listener {
     	
     	if (PlayerBanned)
     	{
-    		// Clear LWC Locks
-    		if (lwcplugin.isHooked())
-    			lwcplugin.ClearLWCLocks(kickedplayer.getName());
-    		
-    		// Delete PlotMe Plots
-    		if (plotmeplugin.isHooked())
-    			plotmeplugin.ClearPlotMePlots(kickedplayer.getName());
-    		
-    		// Delete Players Economy
-    		if (vaultplugin.isHooked())
-    			vaultplugin.ClearEconomy(kickedplayer.getName());
+    		clearPlayer(kickedplayer.getName());
     	}
+    }
+    
+    public void clearPlayer(String playerName) {
+		// Clear LWC Locks
+		if (lwcplugin.isHooked())
+			lwcplugin.ClearLWCLocks(playerName);
+		
+		// Delete PlotMe Plots
+		if (plotmeplugin.isHooked())
+			plotmeplugin.ClearPlotMePlots(playerName);
+		
+		// Delete Players Economy
+		if (vaultplugin.isHooked())
+			vaultplugin.ClearEconomy(playerName);
     }
     
     private void hookPlugins() {
@@ -79,5 +87,16 @@ public class BanSync extends JavaPlugin implements Listener {
     	vaultplugin = new VaultPluginHook(this);
     	vaultplugin.HookVault();
     }
+    
+    private void registerCommands() {
+    	commandManager = new CommandManager();
+        // Load Commands
+        commandManager.addCommand(new RemoveUserCommand(this));
+    }
+    
+    public String getTag() {
+		String tag = ChatColor.GREEN+"[BanSync] "+ChatColor.AQUA;
+		return tag;
+	}
 }
 

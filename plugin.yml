@@ -12,4 +12,14 @@ startup: startup
 
 softdepend: [Vault, PlotMe, LWC]
 
+commands:
+   bansync:
+      description: Main command for BanSync.
+      usage: /<command> help
+      
+permissions:
+   bansync.removeuser:
+      description: Allows you to remove a user manually
+      default: op
+
 

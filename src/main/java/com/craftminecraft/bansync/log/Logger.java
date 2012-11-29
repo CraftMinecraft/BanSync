@@ -3,10 +3,8 @@ package com.craftminecraft.bansync.log;
 import com.craftminecraft.bansync.BanSync;
 
 public class Logger {
-	private BanSync bansyncinterface = null;
-	
 	public Logger (BanSync p) {
-		bansyncinterface = p;
+
 	}
 	
 	public void log (String message) {
