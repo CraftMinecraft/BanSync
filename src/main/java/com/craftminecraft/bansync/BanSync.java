@@ -13,6 +13,7 @@ import com.craftminecraft.bansync.command.CommandManager;
 import com.craftminecraft.bansync.command.commands.DefaultCommand;
 import com.craftminecraft.bansync.command.commands.HelpCommand;
 import com.craftminecraft.bansync.command.commands.RemoveUserCommand;
+import com.craftminecraft.bansync.config.MainConfig;
 import com.craftminecraft.bansync.log.Logger;
 import com.craftminecraft.bansync.plugins.LWCPluginHook;
 import com.craftminecraft.bansync.plugins.PlotMePluginHook;
@@ -24,6 +25,7 @@ public class BanSync extends JavaPlugin implements Listener {
 	private PlotMePluginHook plotmeplugin;
 	private VaultPluginHook vaultplugin;
 	private CommandManager commandManager;
+	private MainConfig mainConfig;
 	
     public void onDisable() {
         lwcplugin = null;
@@ -33,6 +35,7 @@ public class BanSync extends JavaPlugin implements Listener {
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this, this);
         
+        loadConfig();
         hookPlugins();
         registerCommands();
     }
@@ -64,30 +67,48 @@ public class BanSync extends JavaPlugin implements Listener {
     
     public void clearPlayer(String playerName) {
 		// Clear LWC Locks
-		if (lwcplugin.isHooked())
-			lwcplugin.ClearLWCLocks(playerName);
-		
+    	if (mainConfig.EnableLWC)
+    	{
+    		if (lwcplugin.isHooked())
+    			lwcplugin.ClearLWCLocks(playerName);
+    	}
+    	
 		// Delete PlotMe Plots
-		if (plotmeplugin.isHooked())
-			plotmeplugin.ClearPlotMePlots(playerName);
+		if (mainConfig.EnablePlotMe)
+		{
+			if (plotmeplugin.isHooked())
+				plotmeplugin.ClearPlotMePlots(playerName);
+		}
 		
 		// Delete Players Economy
-		if (vaultplugin.isHooked())
-			vaultplugin.ClearEconomy(playerName);
+		if (mainConfig.EnableVault)
+		{
+			if (vaultplugin.isHooked())
+				vaultplugin.ClearEconomy(playerName);
+		}
     }
     
     private void hookPlugins() {
     	// Hook LWC
-    	lwcplugin = new LWCPluginHook(this);
-    	lwcplugin.HookLWC();
-
+    	if (mainConfig.EnableLWC)
+    	{
+    		lwcplugin = new LWCPluginHook(this);
+    		lwcplugin.HookLWC();
+    	}
+    	
     	// Hook PlotMe
-    	plotmeplugin = new PlotMePluginHook(this);
-    	plotmeplugin.HookPlotMe();
+    	if (mainConfig.EnablePlotMe)
+    	{
+    		plotmeplugin = new PlotMePluginHook(this);
+    		plotmeplugin.HookPlotMe();
+    	}
     	
     	// Hook Econony
-    	vaultplugin = new VaultPluginHook(this);
-    	vaultplugin.HookVault();
+    	if (mainConfig.EnableVault)
+    	{
+    		vaultplugin = new VaultPluginHook(this);
+    		vaultplugin.HookVault();
+    	}
     }
     
     private void registerCommands() {
@@ -96,6 +117,12 @@ public class BanSync extends JavaPlugin implements Listener {
     	commandManager.addCommand(new DefaultCommand(this));
     	commandManager.addCommand(new HelpCommand(this));
         commandManager.addCommand(new RemoveUserCommand(this));
+    }
+    
+    private void loadConfig()
+    {
+        mainConfig = new MainConfig(this);
+        mainConfig.load();	
     }
     
     public String getTag() {

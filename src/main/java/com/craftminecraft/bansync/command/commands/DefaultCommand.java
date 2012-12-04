@@ -18,6 +18,6 @@ public class DefaultCommand extends BaseCommand{
 	
 	@Override
     public void execute(CommandSender sender, String[] args) {	
-		sender.sendMessage(plugin.getTag() + "Bansync Version 0.05 - /bansync help for help");
+		sender.sendMessage(plugin.getTag() + "Bansync Version 0.06 - /bansync help for help");
 	}
 }
