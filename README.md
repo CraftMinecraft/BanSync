@@ -41,6 +41,9 @@ Allows the user to run /bansync removeuser, Defaults to op
 [https://github.com/CraftMinecraft/BanSync](https://github.com/CraftMinecraft/BanSync)
 
 ## Change Log
+### Version 0.07
+* TODO
+
 ### Version 0.05
 * Moved project to Beta status
 * Added command /bansync help
