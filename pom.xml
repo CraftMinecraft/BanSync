@@ -1,58 +1,38 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    
     <groupId>com.craftminecraft.bansync</groupId>
     <artifactId>BanSync</artifactId>
     <version>1.0</version>
     <name>Ban Sync</name>
     <url>http://www.craftminecraft.com/</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <bukkit.version>1.4.7-R1.0</bukkit.version>
+    </properties>
+
     <repositories>
-    	<repository>
-			<id>bukkit-repo</id>
-			<url>http://repo.bukkit.org/content/groups/public/</url>
-		</repository>
-		<repository>
-			<id>vault-repo</id>
-			<url>http://ci.herocraftonline.com/plugin/repository/everything</url>
-		</repository>
-  	</repositories>
-  <build>
-    <defaultGoal>compile</defaultGoal>
-    <finalName>${project.name}</finalName>
-    <sourceDirectory>${project.basedir}/src</sourceDirectory>
-    <resources>
-      <resource>
-        <directory>${project.basedir}/src</directory>
-        <filtering>true</filtering>
-        <includes>
-          <include>*.*</include>
-        </includes>
-      </resource>
-    </resources>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>2.4</version>
-        <configuration>
-          <outputDirectory>../jars</outputDirectory>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.3.2</version>
-        <configuration>
-          <source>1.6</source>
-          <target>1.6</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+        <repository>
+            <id>bukkit-repo</id>
+            <url>http://repo.bukkit.org/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>vault-repo</id>
+            <url>http://ci.herocraftonline.com/plugin/repository/everything</url>
+        </repository>
+        <repository>
+            <id>project.local</id>
+            <name>Project Repository</name>
+            <url>file:${project.basedir}/lib</url>
+        </repository>
+    </repositories>
+    
     <dependencies>
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.4.5-R0.2-SNAPSHOT</version>
+            <version>${bukkit.version}</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
@@ -65,19 +45,51 @@
             <systemPath>${project.basedir}/lib/LWC-4.3.1.jar</systemPath>
         </dependency>
         <dependency>
-        	<groupId>PlotMe</groupId>
-        	<artifactId>PlotMe</artifactId>
-        	<version>0.10b</version>
-        	<scope>system</scope>
-        	<optional>true</optional>
-        	<systemPath>${project.basedir}/lib/PlotMe-0.10b.jar</systemPath>
+            <groupId>PlotMe</groupId>
+            <artifactId>PlotMe</artifactId>
+            <version>0.10b</version>
+            <scope>system</scope>
+            <optional>true</optional>
+            <systemPath>${project.basedir}/lib/PlotMe-0.10b.jar</systemPath>
         </dependency>
         <dependency>
-		    <groupId>net.milkbowl.vault</groupId>
+            <groupId>net.milkbowl.vault</groupId>
             <artifactId>Vault</artifactId>
             <version>1.2.20-SNAPSHOT</version>
             <optional>true</optional>
             <scope>provided</scope>
-		</dependency>
+        </dependency>
     </dependencies>
+    
+    <build>
+        <resources>
+            <resource>
+                <targetPath>.</targetPath>
+                <directory>${basedir}/src/main/resources/</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>plugin.yml</include>
+                </includes>
+            </resource>
+            <resource>
+                <targetPath>.</targetPath>
+                <directory>${basedir}/</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>README.md</include>
+                </includes>
+            </resource>
+        </resources>
+        
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
