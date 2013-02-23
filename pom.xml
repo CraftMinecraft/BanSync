@@ -3,7 +3,7 @@
     
     <groupId>com.craftminecraft.bansync</groupId>
     <artifactId>BanSync</artifactId>
-    <version>1.0.%build.number%</version>
+    <version>1.0.${build.number}</version>
     <name>Ban Sync</name>
     <url>http://www.craftminecraft.com/</url>
 
