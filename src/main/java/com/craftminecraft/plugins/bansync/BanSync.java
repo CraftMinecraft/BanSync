@@ -15,6 +15,7 @@ import com.craftminecraft.plugins.bansync.command.commands.HelpCommand;
 import com.craftminecraft.plugins.bansync.command.commands.RemoveUserCommand;
 import com.craftminecraft.plugins.bansync.config.MainConfig;
 import com.craftminecraft.plugins.bansync.log.Logger;
+import com.craftminecraft.plugins.bansync.plugins.GriefPreventionHook;
 import com.craftminecraft.plugins.bansync.plugins.LWCPluginHook;
 import com.craftminecraft.plugins.bansync.plugins.PlotMePluginHook;
 import com.craftminecraft.plugins.bansync.plugins.VaultPluginHook;
@@ -25,6 +26,7 @@ public class BanSync extends JavaPlugin implements Listener {
 	private PlotMePluginHook plotmeplugin;
 	private VaultPluginHook vaultplugin;
 	private CommandManager commandManager;
+	private GriefPreventionHook griefpreventionplugin;
 	private MainConfig mainConfig;
 	
     public void onDisable() {
@@ -86,6 +88,13 @@ public class BanSync extends JavaPlugin implements Listener {
 			if (vaultplugin.isHooked())
 				vaultplugin.ClearEconomy(playerName);
 		}
+		
+		// Delete Grief Prevention
+		if (mainConfig.EnableGriefPrevention)
+		{
+			if (griefpreventionplugin.isHooked())
+				griefpreventionplugin.ClearGriefPreventionLocks(playerName);
+		}
     }
     
     private void hookPlugins() {
@@ -108,6 +117,13 @@ public class BanSync extends JavaPlugin implements Listener {
     	{
     		vaultplugin = new VaultPluginHook(this);
     		vaultplugin.HookVault();
+    	}
+    	
+    	// Hook GriefPrevention
+    	if (mainConfig.EnableGriefPrevention)
+    	{
+    		griefpreventionplugin = new GriefPreventionHook(this);
+    		griefpreventionplugin.HookGriefPrevention();
     	}
     }
     
