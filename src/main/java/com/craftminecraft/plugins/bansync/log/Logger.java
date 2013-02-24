@@ -1,6 +1,6 @@
-package com.craftminecraft.bansync.log;
+package com.craftminecraft.plugins.bansync.log;
 
-import com.craftminecraft.bansync.BanSync;
+import com.craftminecraft.plugins.bansync.BanSync;
 
 public class Logger {
 	public Logger (BanSync p) {

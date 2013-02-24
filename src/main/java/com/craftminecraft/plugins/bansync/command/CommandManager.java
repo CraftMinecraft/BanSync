@@ -1,4 +1,4 @@
-package com.craftminecraft.bansync.command;
+package com.craftminecraft.plugins.bansync.command;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-import com.craftminecraft.bansync.BanSync;
+import com.craftminecraft.plugins.bansync.BanSync;
 
 public class CommandManager {
 	protected List<BaseCommand> commands;

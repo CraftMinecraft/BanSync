@@ -1,4 +1,4 @@
-package com.craftminecraft.bansync;
+package com.craftminecraft.plugins.bansync;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -9,15 +9,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.craftminecraft.bansync.command.CommandManager;
-import com.craftminecraft.bansync.command.commands.DefaultCommand;
-import com.craftminecraft.bansync.command.commands.HelpCommand;
-import com.craftminecraft.bansync.command.commands.RemoveUserCommand;
-import com.craftminecraft.bansync.config.MainConfig;
-import com.craftminecraft.bansync.log.Logger;
-import com.craftminecraft.bansync.plugins.LWCPluginHook;
-import com.craftminecraft.bansync.plugins.PlotMePluginHook;
-import com.craftminecraft.bansync.plugins.VaultPluginHook;
+import com.craftminecraft.plugins.bansync.command.CommandManager;
+import com.craftminecraft.plugins.bansync.command.commands.DefaultCommand;
+import com.craftminecraft.plugins.bansync.command.commands.HelpCommand;
+import com.craftminecraft.plugins.bansync.command.commands.RemoveUserCommand;
+import com.craftminecraft.plugins.bansync.config.MainConfig;
+import com.craftminecraft.plugins.bansync.log.Logger;
+import com.craftminecraft.plugins.bansync.plugins.LWCPluginHook;
+import com.craftminecraft.plugins.bansync.plugins.PlotMePluginHook;
+import com.craftminecraft.plugins.bansync.plugins.VaultPluginHook;
 
 public class BanSync extends JavaPlugin implements Listener {
 	public Logger logger = new Logger(this);

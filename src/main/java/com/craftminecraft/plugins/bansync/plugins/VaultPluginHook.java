@@ -1,4 +1,4 @@
-package com.craftminecraft.bansync.plugins;
+package com.craftminecraft.plugins.bansync.plugins;
 
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -6,8 +6,8 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import net.milkbowl.vault.Vault;
 import net.milkbowl.vault.economy.Economy;
 
-import com.craftminecraft.bansync.BanSync;
-import com.craftminecraft.bansync.log.LogLevels;
+import com.craftminecraft.plugins.bansync.BanSync;
+import com.craftminecraft.plugins.bansync.log.LogLevels;
 
 public class VaultPluginHook {
 	private BanSync bansyncinterface = null;

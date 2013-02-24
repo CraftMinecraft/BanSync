@@ -5,7 +5,7 @@
     <artifactId>BanSync</artifactId>
     <version>1.0-b${build.number}</version>
     <name>Ban Sync</name>
-    <url>http://www.craftminecraft.com/</url>
+    <url>http://dev.craftminecraft.net/</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -51,6 +51,14 @@
             <scope>system</scope>
             <optional>true</optional>
             <systemPath>${project.basedir}/lib/PlotMe-0.10b.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>GriefPrevention</groupId>
+            <artifactId>GriefPrevention</artifactId>
+            <version>7.6.2</version>
+            <scope>system</scope>
+            <optional>true</optional>
+            <systemPath>${project.basedir}/lib/GriefPrevention.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>net.milkbowl.vault</groupId>

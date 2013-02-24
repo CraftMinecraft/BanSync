@@ -3,14 +3,14 @@ author: FireBall1725
 url: http://www.craftminecraft.com/
 
 version: 1.0
-main: com.craftminecraft.plugins.bansync.BanSync
+main: com.craftminecraft.bansync.BanSync
 
 database: false
 description: Sync player bans to other plugins, such as LWC and PlotMe.
 
 startup: startup
 
-softdepend: [Vault, PlotMe, LWC, GriefPrevention]
+softdepend: [Vault, PlotMe, LWC]
 
 commands:
    bansync:

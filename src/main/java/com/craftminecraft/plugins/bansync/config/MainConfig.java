@@ -1,4 +1,4 @@
-package com.craftminecraft.bansync.config;
+package com.craftminecraft.plugins.bansync.config;
 
 import org.bukkit.plugin.Plugin;
 
@@ -10,4 +10,5 @@ public class MainConfig extends Config{
 	public Boolean EnableLWC = true;
 	public Boolean EnablePlotMe = true;
 	public Boolean EnableVault = true;
+	public Boolean EnableGriefPrevention = true;
 }
