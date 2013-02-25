@@ -49,7 +49,8 @@ public class PlotMePluginHook {
 		List<World> worlds = bansyncinterface.getServer().getWorlds();
 		
 		for (World w : worlds) {
-			HashMap<String, Plot> plots = PlotManager.getPlots(w);
+			HashMap<String, Plot> plots = new HashMap<String, Plot>();
+			plots = PlotManager.getPlots(w);
 			if (!plots.equals(null))
 			{
 			if (plots.size() > 0)
