@@ -1,6 +1,7 @@
 package com.craftminecraft.plugins.bansync.plugins;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -45,29 +46,32 @@ public class PlotMePluginHook {
 	{
 		bansyncinterface.logger.log(LogLevels.INFO, "Removing PlotMe Plots");
 		
-		World w = bansyncinterface.getServer().getWorld("world");
-		HashMap<String, Plot> plots = PlotManager.getPlots(w);
-		if (!plots.isEmpty())
-		{
-			for (String id : plots.keySet())
+		List<World> worlds = bansyncinterface.getServer().getWorlds();
+		
+		for (World w : worlds) {
+			HashMap<String, Plot> plots = PlotManager.getPlots(w);
+			if (plots.size() > 0)
 			{
-				Plot plot = plots.get(id);
-				bansyncinterface.logger.log("[DEBUG] Found Plot " + plot.id + " Owner: " + plot.owner);
-				
-				if (plot.owner.equalsIgnoreCase(playerName))
+				for (String id : plots.keySet())
 				{
-					bansyncinterface.logger.log(LogLevels.INFO, "Found plot " + plot.id + ", Removing it");
-					String plotID = plot.id;
+					Plot plot = plots.get(id);
+					bansyncinterface.logger.log("[DEBUG] Found Plot " + plot.id + " Owner: " + plot.owner);
 					
-					Location bottom = PlotManager.getPlotBottomLoc(w, plotID);
-					Location top = PlotManager.getPlotTopLoc(w, plotID);
-					PlotManager.clear(bottom, top);
-					
-					PlotManager.removeOwnerSign(w, plotID);
-					PlotManager.removeSellSign(w, plotID);
-					
-					SqlManager.deletePlot(PlotManager.getIdX(plotID), PlotManager.getIdZ(plotID), w.getName().toLowerCase());
-				}
+					if (plot.owner.equalsIgnoreCase(playerName))
+					{
+						bansyncinterface.logger.log(LogLevels.INFO, "Found plot " + plot.id + ", Removing it");
+						String plotID = plot.id;
+						
+						Location bottom = PlotManager.getPlotBottomLoc(w, plotID);
+						Location top = PlotManager.getPlotTopLoc(w, plotID);
+						PlotManager.clear(bottom, top);
+						
+						PlotManager.removeOwnerSign(w, plotID);
+						PlotManager.removeSellSign(w, plotID);
+						
+						SqlManager.deletePlot(PlotManager.getIdX(plotID), PlotManager.getIdZ(plotID), w.getName().toLowerCase());
+					}
+				}	
 			}
 		}
 	}
