@@ -48,7 +48,11 @@ public class PlotMePluginHook {
 		
 		List<World> worlds = bansyncinterface.getServer().getWorlds();
 		
+		//PlotManager.getPlots(p)
+		
 		for (World w : worlds) {
+			if (PlotManager.isPlotWorld(w))
+			{
 			HashMap<String, Plot> plots = new HashMap<String, Plot>();
 			plots = PlotManager.getPlots(w);
 			if (!plots.equals(null))
@@ -75,6 +79,7 @@ public class PlotMePluginHook {
 						SqlManager.deletePlot(PlotManager.getIdX(plotID), PlotManager.getIdZ(plotID), w.getName().toLowerCase());
 					}
 				}	
+			}
 			}
 			}
 		}
