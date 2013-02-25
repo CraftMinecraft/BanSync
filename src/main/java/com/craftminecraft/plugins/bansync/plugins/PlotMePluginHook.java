@@ -53,34 +53,40 @@ public class PlotMePluginHook {
 		for (World w : worlds) {
 			if (PlotManager.isPlotWorld(w))
 			{
-			HashMap<String, Plot> plots = new HashMap<String, Plot>();
-			plots = PlotManager.getPlots(w);
-			if (!plots.equals(null))
-			{
-			if (plots.size() > 0)
-			{
-				for (String id : plots.keySet())
+				HashMap<String, Plot> plots = new HashMap<String, Plot>();
+				plots = PlotManager.getPlots(w);
+				if (!plots.equals(null))
 				{
-					Plot plot = plots.get(id);
-					bansyncinterface.logger.log("[DEBUG] Found Plot " + plot.id + " Owner: " + plot.owner);
-					
-					if (plot.owner.equalsIgnoreCase(playerName))
+					if (plots.size() > 0)
 					{
-						bansyncinterface.logger.log(LogLevels.INFO, "Found plot " + plot.id + ", Removing it");
-						String plotID = plot.id;
+						for (String id : plots.keySet())
+						{
+							Plot plot = plots.get(id);
+							bansyncinterface.logger.log("[DEBUG] Found Plot " + plot.id + " Owner: " + plot.owner);
+					
+							if (plot.owner.equalsIgnoreCase(playerName))
+							{
+								bansyncinterface.logger.log(LogLevels.INFO, "Found plot " + plot.id + ", Removing it");
+								String plotID = plot.id;
 						
-						Location bottom = PlotManager.getPlotBottomLoc(w, plotID);
-						Location top = PlotManager.getPlotTopLoc(w, plotID);
-						PlotManager.clear(bottom, top);
+								Location bottom = PlotManager.getPlotBottomLoc(w, plotID);
+								Location top = PlotManager.getPlotTopLoc(w, plotID);
+								PlotManager.clear(bottom, top);
 						
-						PlotManager.removeOwnerSign(w, plotID);
-						PlotManager.removeSellSign(w, plotID);
+								PlotManager.removeOwnerSign(w, plotID);
+								PlotManager.removeSellSign(w, plotID);
 						
-						SqlManager.deletePlot(PlotManager.getIdX(plotID), PlotManager.getIdZ(plotID), w.getName().toLowerCase());
+								SqlManager.deletePlot(PlotManager.getIdX(plotID), PlotManager.getIdZ(plotID), w.getName().toLowerCase());
+								SqlManager.UpdateTables();
+							}
+							
+							if (plot.isAllowed(playerName))
+							{
+								plot.removeAllowed(playerName);
+							}
+						}	
 					}
-				}	
-			}
-			}
+				}
 			}
 		}
 	}
