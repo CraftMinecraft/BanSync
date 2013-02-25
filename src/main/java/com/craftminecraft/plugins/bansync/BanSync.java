@@ -60,10 +60,12 @@ public class BanSync extends JavaPlugin implements Listener {
     	
     	// Check to see if user is banned with Essentials
     	
-    	
-    	if (PlayerBanned)
+    	if (mainConfig.AutoDeletePlayerOnBan)
     	{
-    		clearPlayer(kickedplayer.getName());
+    		if (PlayerBanned)
+    		{
+    			clearPlayer(kickedplayer.getName());
+    		}
     	}
     }
     

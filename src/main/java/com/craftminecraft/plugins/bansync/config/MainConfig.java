@@ -6,6 +6,7 @@ public class MainConfig extends Config{
 	public MainConfig(Plugin plugin) {
 		this.setFile(plugin);
 	}
+	public Boolean AutoDeletePlayerOnBan = true;
 	
 	public Boolean EnableLWC = true;
 	public Boolean EnablePlotMe = true;

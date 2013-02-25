@@ -47,10 +47,10 @@
         <dependency>
             <groupId>PlotMe</groupId>
             <artifactId>PlotMe</artifactId>
-            <version>0.10b</version>
+            <version>0.13</version>
             <scope>system</scope>
             <optional>true</optional>
-            <systemPath>${project.basedir}/lib/PlotMe-0.10b.jar</systemPath>
+            <systemPath>${project.basedir}/lib/PlotMe.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>GriefPrevention</groupId>
