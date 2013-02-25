@@ -50,6 +50,8 @@ public class PlotMePluginHook {
 		
 		for (World w : worlds) {
 			HashMap<String, Plot> plots = PlotManager.getPlots(w);
+			if (!plots.equals(null))
+			{
 			if (plots.size() > 0)
 			{
 				for (String id : plots.keySet())
@@ -72,6 +74,7 @@ public class PlotMePluginHook {
 						SqlManager.deletePlot(PlotManager.getIdX(plotID), PlotManager.getIdZ(plotID), w.getName().toLowerCase());
 					}
 				}	
+			}
 			}
 		}
 	}
