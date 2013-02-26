@@ -9,6 +9,7 @@ import org.bukkit.plugin.Plugin;
 import com.craftminecraft.plugins.bansync.BanSync;
 import com.craftminecraft.plugins.bansync.log.LogLevels;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.databases.ProtectionDatabaseException;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
@@ -54,6 +55,11 @@ public class WorldGuardHook {
 				if (regions.get(id).getOwners().getPlayers().contains(playerName)) {
 					bansyncinterface.logger.log(LogLevels.INFO, "Found region " + id + ", Removing it");
 					rm.removeRegion(id);
+					try {
+						rm.save();
+					} catch (ProtectionDatabaseException e) {
+						bansyncinterface.logger.log(LogLevels.INFO, "Error removing region " + id + ", " + e.getMessage());
+					}
 				}
 			}
 		}
