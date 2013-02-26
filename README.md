@@ -2,7 +2,7 @@
 After you ban a user, what then?  Now you have to go around and remove the locks the user has made, their stores, their economy, etc.  That is where BanSync comes into play, When a user is kicked from the server, it will check to see if they are banned, and then if they are, it will automatically take care of the rest for you.
 
 ## Latest Version
-Latest Recommended Build: **1.0-b16**
+Latest Recommended Build: **1.0-b17**
 
 ## Supported Ban Plugins
 * Vanilla Ban System
@@ -35,6 +35,7 @@ EnableLWC: true
 EnablePlotMe: true
 EnableVault: true
 EnableGriefPrevention: true
+EnableWorldGuard: true
 ```
 
 ## Commands
@@ -53,7 +54,6 @@ EnableGriefPrevention: true
 	* Chest Shop
 	* Citizens / Citizens 2 / NPCs
 	* CitiTrader
-	* World Guard (Regions)
 	* Essentials (Delete users settings, items in hand, homes, etc)
 	* Please suggest more plugins that you would like support added too...
 * Timeout before sync happens
