@@ -19,6 +19,7 @@ import com.craftminecraft.plugins.bansync.plugins.GriefPreventionHook;
 import com.craftminecraft.plugins.bansync.plugins.LWCPluginHook;
 import com.craftminecraft.plugins.bansync.plugins.PlotMePluginHook;
 import com.craftminecraft.plugins.bansync.plugins.VaultPluginHook;
+import com.craftminecraft.plugins.bansync.plugins.WorldGuardHook;
 
 public class BanSync extends JavaPlugin implements Listener {
 	public Logger logger = new Logger(this);
@@ -27,6 +28,7 @@ public class BanSync extends JavaPlugin implements Listener {
 	private VaultPluginHook vaultplugin;
 	private CommandManager commandManager;
 	private GriefPreventionHook griefpreventionplugin;
+	private WorldGuardHook worldguardplugin;
 	private MainConfig mainConfig;
 	
     public void onDisable() {
@@ -97,6 +99,13 @@ public class BanSync extends JavaPlugin implements Listener {
 			if (griefpreventionplugin.isHooked())
 				griefpreventionplugin.ClearGriefPreventionLocks(playerName);
 		}
+		
+		// Delete WorldGuard Regions
+		if (mainConfig.EnableWorldGuard)
+		{
+			if (worldguardplugin.isHooked())
+				worldguardplugin.ClearWorldGuardRegions(playerName);
+		}
     }
     
     private void hookPlugins() {
@@ -126,6 +135,13 @@ public class BanSync extends JavaPlugin implements Listener {
     	{
     		griefpreventionplugin = new GriefPreventionHook(this);
     		griefpreventionplugin.HookGriefPrevention();
+    	}
+    	
+    	// Hook WorldGuard
+    	if (mainConfig.EnableWorldGuard)
+    	{
+    		worldguardplugin = new WorldGuardHook(this);
+    		worldguardplugin.HookWorldGuard();
     	}
     }
     

@@ -12,4 +12,5 @@ public class MainConfig extends Config{
 	public Boolean EnablePlotMe = true;
 	public Boolean EnableVault = true;
 	public Boolean EnableGriefPrevention = true;
+	public Boolean EnableWorldGuard = true;
 }

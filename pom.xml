@@ -26,6 +26,10 @@
             <name>Project Repository</name>
             <url>file:${project.basedir}/lib</url>
         </repository>
+		<repository>
+		    <id>sk89q-repo</id>
+		    <url>http://maven.sk89q.com/repo/</url>
+		</repository>
     </repositories>
     
     <dependencies>
@@ -66,6 +70,12 @@
             <version>1.2.20-SNAPSHOT</version>
             <optional>true</optional>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sk89q</groupId>
+            <artifactId>worldguard</artifactId>
+            <version>5.7.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
     
