@@ -1,11 +1,11 @@
-package com.craftminecraft.plugins.bansync.plugins;
+package net.craftminecraft.bukkit.bansync.plugins;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 
-import com.craftminecraft.plugins.bansync.BanSync;
-import com.craftminecraft.plugins.bansync.log.LogLevels;
+import net.craftminecraft.bukkit.bansync.BanSync;
+import net.craftminecraft.bukkit.bansync.log.LogLevels;
 
 import com.griefcraft.lwc.LWC;
 import com.griefcraft.lwc.LWCPlugin;

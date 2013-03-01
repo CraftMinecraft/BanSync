@@ -1,9 +1,9 @@
-package com.craftminecraft.plugins.bansync.command.commands;
+package net.craftminecraft.bukkit.bansync.command.commands;
 
 import org.bukkit.command.CommandSender;
 
-import com.craftminecraft.plugins.bansync.BanSync;
-import com.craftminecraft.plugins.bansync.command.BaseCommand;
+import net.craftminecraft.bukkit.bansync.BanSync;
+import net.craftminecraft.bukkit.bansync.command.BaseCommand;
 
 public class DefaultCommand extends BaseCommand{
 	public DefaultCommand(BanSync plugin) {

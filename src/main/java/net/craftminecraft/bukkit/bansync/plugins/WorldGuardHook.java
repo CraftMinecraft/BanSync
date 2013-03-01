@@ -1,4 +1,4 @@
-package com.craftminecraft.plugins.bansync.plugins;
+package net.craftminecraft.bukkit.bansync.plugins;
 
 import java.util.List;
 import java.util.Map;
@@ -6,8 +6,8 @@ import java.util.Map;
 import org.bukkit.World;
 import org.bukkit.plugin.Plugin;
 
-import com.craftminecraft.plugins.bansync.BanSync;
-import com.craftminecraft.plugins.bansync.log.LogLevels;
+import net.craftminecraft.bukkit.bansync.BanSync;
+import net.craftminecraft.bukkit.bansync.log.LogLevels;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.databases.ProtectionDatabaseException;
 import com.sk89q.worldguard.protection.managers.RegionManager;

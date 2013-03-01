@@ -1,4 +1,4 @@
-package com.craftminecraft.plugins.bansync.config;
+package net.craftminecraft.bukkit.bansync.config;
 
 import java.io.File;
 import java.lang.reflect.Field;

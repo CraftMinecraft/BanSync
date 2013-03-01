@@ -1,4 +1,4 @@
-package com.craftminecraft.plugins.bansync;
+package net.craftminecraft.bukkit.bansync;
 
 import java.io.IOException;
 
@@ -10,20 +10,19 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.mcstats.Metrics;
 
-import com.craftminecraft.plugins.bansync.command.CommandManager;
-import com.craftminecraft.plugins.bansync.command.commands.DefaultCommand;
-import com.craftminecraft.plugins.bansync.command.commands.HelpCommand;
-import com.craftminecraft.plugins.bansync.command.commands.RemoveUserCommand;
-import com.craftminecraft.plugins.bansync.config.MainConfig;
-import com.craftminecraft.plugins.bansync.log.LogLevels;
-import com.craftminecraft.plugins.bansync.log.Logger;
-import com.craftminecraft.plugins.bansync.plugins.GriefPreventionHook;
-import com.craftminecraft.plugins.bansync.plugins.LWCPluginHook;
-import com.craftminecraft.plugins.bansync.plugins.PlotMePluginHook;
-import com.craftminecraft.plugins.bansync.plugins.VaultPluginHook;
-import com.craftminecraft.plugins.bansync.plugins.WorldGuardHook;
+import net.craftminecraft.bukkit.bansync.command.CommandManager;
+import net.craftminecraft.bukkit.bansync.command.commands.DefaultCommand;
+import net.craftminecraft.bukkit.bansync.command.commands.HelpCommand;
+import net.craftminecraft.bukkit.bansync.command.commands.RemoveUserCommand;
+import net.craftminecraft.bukkit.bansync.config.MainConfig;
+import net.craftminecraft.bukkit.bansync.log.LogLevels;
+import net.craftminecraft.bukkit.bansync.log.Logger;
+import net.craftminecraft.bukkit.bansync.plugins.GriefPreventionHook;
+import net.craftminecraft.bukkit.bansync.plugins.LWCPluginHook;
+import net.craftminecraft.bukkit.bansync.plugins.PlotMePluginHook;
+import net.craftminecraft.bukkit.bansync.plugins.VaultPluginHook;
+import net.craftminecraft.bukkit.bansync.plugins.WorldGuardHook;
 
 public class BanSync extends JavaPlugin implements Listener {
 	public Logger logger = new Logger(this);

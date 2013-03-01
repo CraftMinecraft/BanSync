@@ -1,9 +1,9 @@
-package com.craftminecraft.plugins.bansync.plugins;
+package net.craftminecraft.bukkit.bansync.plugins;
 
 import org.bukkit.plugin.Plugin;
 
-import com.craftminecraft.plugins.bansync.BanSync;
-import com.craftminecraft.plugins.bansync.log.LogLevels;
+import net.craftminecraft.bukkit.bansync.BanSync;
+import net.craftminecraft.bukkit.bansync.log.LogLevels;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
 
 public class GriefPreventionHook {

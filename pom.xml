@@ -30,10 +30,6 @@
 		    <id>sk89q-repo</id>
 		    <url>http://maven.sk89q.com/repo/</url>
 		</repository>
-		<repository>
-        	<id>Plugin Metrics</id>
-        	<url>http://repo.mcstats.org/content/repositories/public</url>
-    	</repository>
     </repositories>
     
     <dependencies>
@@ -81,11 +77,6 @@
             <version>5.7.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-        	<groupId>org.mcstats.bukkit</groupId>
-        	<artifactId>metrics</artifactId>
-        	<scope>compile</scope>
-    	</dependency>
     </dependencies>
     
     <build>
@@ -117,38 +108,6 @@
                     <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>
-        
-        	<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>2.0</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-						    <minimizeJar>true</minimizeJar>
-						    <relocations>
-                                <relocation>
-                                    <pattern>org.mcstats</pattern>
-                                    <shadedPattern>me.desht.mcstats</shadedPattern>
-                                </relocation>
-                            </relocations>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
     </build>
-    <dependencyManagement>
-    	<dependencies>
-    		<dependency>
-    			<groupId>org.mcstats.bukkit</groupId>
-    			<artifactId>metrics</artifactId>
-    			<version>R6</version>
-    		</dependency>
-    	</dependencies>
-    </dependencyManagement>
 </project>

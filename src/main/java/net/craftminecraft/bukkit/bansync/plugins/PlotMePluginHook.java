@@ -1,4 +1,4 @@
-package com.craftminecraft.plugins.bansync.plugins;
+package net.craftminecraft.bukkit.bansync.plugins;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,8 +7,8 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.plugin.Plugin;
 
-import com.craftminecraft.plugins.bansync.BanSync;
-import com.craftminecraft.plugins.bansync.log.LogLevels;
+import net.craftminecraft.bukkit.bansync.BanSync;
+import net.craftminecraft.bukkit.bansync.log.LogLevels;
 import com.worldcretornica.plotme.Plot;
 import com.worldcretornica.plotme.PlotManager;
 import com.worldcretornica.plotme.PlotMe;
