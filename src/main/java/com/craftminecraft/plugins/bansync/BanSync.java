@@ -1,5 +1,7 @@
 package com.craftminecraft.plugins.bansync;
 
+import java.io.IOException;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -8,12 +10,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.mcstats.Metrics;
 
 import com.craftminecraft.plugins.bansync.command.CommandManager;
 import com.craftminecraft.plugins.bansync.command.commands.DefaultCommand;
 import com.craftminecraft.plugins.bansync.command.commands.HelpCommand;
 import com.craftminecraft.plugins.bansync.command.commands.RemoveUserCommand;
 import com.craftminecraft.plugins.bansync.config.MainConfig;
+import com.craftminecraft.plugins.bansync.log.LogLevels;
 import com.craftminecraft.plugins.bansync.log.Logger;
 import com.craftminecraft.plugins.bansync.plugins.GriefPreventionHook;
 import com.craftminecraft.plugins.bansync.plugins.LWCPluginHook;
@@ -42,6 +46,14 @@ public class BanSync extends JavaPlugin implements Listener {
         loadConfig();
         hookPlugins();
         registerCommands();
+        
+        try {
+            Metrics metrics = new Metrics(this);
+            metrics.start();
+        } catch (IOException e) {
+            // Failed to submit the stats :-(
+        	logger.log(LogLevels.FATAL, "Failed to submit stats");
+        }
     }
     
     @Override
