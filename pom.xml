@@ -129,11 +129,13 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
-							<artifactSet>
-								<includes>
-									<include>org.mcstats:metrics</include>
-								</includes>
-							</artifactSet>
+						    <minimizeJar>true</minimizeJar>
+						    <relocations>
+                                <relocation>
+                                    <pattern>org.mcstats</pattern>
+                                    <shadedPattern>me.desht.mcstats</shadedPattern>
+                                </relocation>
+                            </relocations>
 						</configuration>
 					</execution>
 				</executions>
