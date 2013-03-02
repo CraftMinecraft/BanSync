@@ -67,6 +67,6 @@ public class EssentialsHook {
 			}
 		}
 		
-		ess.getUser(user).remove();
+		//ess.getUser(user).remove();
 	}
 }
