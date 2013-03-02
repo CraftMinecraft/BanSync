@@ -66,5 +66,7 @@ public class EssentialsHook {
 				bansyncinterface.logger.log(LogLevels.FATAL, e.getMessage());
 			}
 		}
+		
+		ess.getUser(user).remove();
 	}
 }
