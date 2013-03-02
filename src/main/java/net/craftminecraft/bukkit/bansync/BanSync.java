@@ -18,6 +18,7 @@ import net.craftminecraft.bukkit.bansync.command.commands.RemoveUserCommand;
 import net.craftminecraft.bukkit.bansync.config.MainConfig;
 import net.craftminecraft.bukkit.bansync.log.LogLevels;
 import net.craftminecraft.bukkit.bansync.log.Logger;
+import net.craftminecraft.bukkit.bansync.plugins.EssentialsHook;
 import net.craftminecraft.bukkit.bansync.plugins.GriefPreventionHook;
 import net.craftminecraft.bukkit.bansync.plugins.LWCPluginHook;
 import net.craftminecraft.bukkit.bansync.plugins.PlotMePluginHook;
@@ -32,6 +33,7 @@ public class BanSync extends JavaPlugin implements Listener {
 	private CommandManager commandManager;
 	private GriefPreventionHook griefpreventionplugin;
 	private WorldGuardHook worldguardplugin;
+	private EssentialsHook essentialsplugin;
 	private MainConfig mainConfig;
 	
     public void onDisable() {
@@ -117,6 +119,13 @@ public class BanSync extends JavaPlugin implements Listener {
 			if (worldguardplugin.isHooked())
 				worldguardplugin.ClearWorldGuardRegions(playerName);
 		}
+		
+		// Delete Essentials Data
+		if (mainConfig.EnableEssentials)
+		{
+			if (essentialsplugin.isHooked())
+				essentialsplugin.ClearEssentials(playerName);
+		}
     }
     
     private void hookPlugins() {
@@ -153,6 +162,13 @@ public class BanSync extends JavaPlugin implements Listener {
     	{
     		worldguardplugin = new WorldGuardHook(this);
     		worldguardplugin.HookWorldGuard();
+    	}
+    	
+    	// Hook Essentials
+    	if (mainConfig.EnableEssentials)
+    	{
+    		essentialsplugin = new EssentialsHook(this);
+    		essentialsplugin.HookEssentials();
     	}
     }
     

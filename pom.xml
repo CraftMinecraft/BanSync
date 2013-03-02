@@ -65,6 +65,14 @@
             <systemPath>${project.basedir}/lib/GriefPrevention.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>Essentials</groupId>
+            <artifactId>Essentials</artifactId>
+            <version>2.10.1</version>
+            <scope>system</scope>
+            <optional>true</optional>
+            <systemPath>${project.basedir}/lib/Essentials.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>net.milkbowl.vault</groupId>
             <artifactId>Vault</artifactId>
             <version>1.2.20-SNAPSHOT</version>

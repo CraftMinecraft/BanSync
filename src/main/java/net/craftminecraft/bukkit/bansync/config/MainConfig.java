@@ -13,4 +13,5 @@ public class MainConfig extends Config{
 	public Boolean EnableVault = true;
 	public Boolean EnableGriefPrevention = true;
 	public Boolean EnableWorldGuard = true;
+	public Boolean EnableEssentials = true;
 }
