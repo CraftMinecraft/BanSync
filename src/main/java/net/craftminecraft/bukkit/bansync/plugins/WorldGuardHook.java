@@ -65,12 +65,22 @@ public class WorldGuardHook {
 					}
 					else
 					{
-						bansyncinterface.logger.log(LogLevels.INFO, "Found region " + id + ", Removing it");
-						rm.removeRegion(id);
-						try {
-							rm.save();
-						} catch (ProtectionDatabaseException e) {
-							bansyncinterface.logger.log(LogLevels.INFO, "Error removing region " + id + ", " + e.getMessage());
+						if (bansyncinterface.mainConfig.Plugin_WorldGuard_DeletePlotIfNoOwnersLeft) {
+							bansyncinterface.logger.log(LogLevels.INFO, "Found region " + id + ", Removing it");
+							rm.removeRegion(id);
+							try {
+								rm.save();
+							} catch (ProtectionDatabaseException e) {
+								bansyncinterface.logger.log(LogLevels.INFO, "Error removing region " + id + ", " + e.getMessage());
+							}
+						} else {
+							bansyncinterface.logger.log(LogLevels.INFO, "Found region " + id + ", Removing player as an owner");
+							rm.getRegionExact(id).getOwners().removePlayer(playerName);
+							try {
+								rm.save();
+							} catch (ProtectionDatabaseException e) {
+								bansyncinterface.logger.log(LogLevels.INFO, "Error removing region " + id + ", " + e.getMessage());
+							}
 						}
 					}
 				}

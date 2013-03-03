@@ -34,7 +34,8 @@ public class BanSync extends JavaPlugin implements Listener {
 	private GriefPreventionHook griefpreventionplugin;
 	private WorldGuardHook worldguardplugin;
 	private EssentialsHook essentialsplugin;
-	private MainConfig mainConfig;
+	
+	public MainConfig mainConfig;
 	
     public void onDisable() {
         lwcplugin = null;
@@ -75,7 +76,7 @@ public class BanSync extends JavaPlugin implements Listener {
     	
     	// Check to see if user is banned with Essentials
     	
-    	if (mainConfig.AutoDeletePlayerOnBan)
+    	if (mainConfig.General_AutoDeleteOnBan)
     	{
     		if (PlayerBanned)
     		{
@@ -86,42 +87,42 @@ public class BanSync extends JavaPlugin implements Listener {
     
     public void clearPlayer(String playerName) {
 		// Clear LWC Locks
-    	if (mainConfig.EnableLWC)
+    	if (mainConfig.Plugin_LWC_Enabled)
     	{
     		if (lwcplugin.isHooked())
     			lwcplugin.ClearLWCLocks(playerName);
     	}
     	
 		// Delete PlotMe Plots
-		if (mainConfig.EnablePlotMe)
+		if (mainConfig.Plugin_PlotMe_Enabled)
 		{
 			if (plotmeplugin.isHooked())
 				plotmeplugin.ClearPlotMePlots(playerName);
 		}
 		
 		// Delete Players Economy
-		if (mainConfig.EnableVault)
+		if (mainConfig.Plugin_Vault_Enabled)
 		{
 			if (vaultplugin.isHooked())
 				vaultplugin.ClearEconomy(playerName);
 		}
 		
 		// Delete Grief Prevention
-		if (mainConfig.EnableGriefPrevention)
+		if (mainConfig.Plugin_GriefPrevention_Enabled)
 		{
 			if (griefpreventionplugin.isHooked())
 				griefpreventionplugin.ClearGriefPreventionLocks(playerName);
 		}
 		
 		// Delete WorldGuard Regions
-		if (mainConfig.EnableWorldGuard)
+		if (mainConfig.Plugin_WorldGuard_Enabled)
 		{
 			if (worldguardplugin.isHooked())
 				worldguardplugin.ClearWorldGuardRegions(playerName);
 		}
 		
 		// Delete Essentials Data
-		if (mainConfig.EnableEssentials)
+		if (mainConfig.Plugin_Essentials_Enabled)
 		{
 			if (essentialsplugin.isHooked())
 				essentialsplugin.ClearEssentials(playerName);
@@ -130,42 +131,42 @@ public class BanSync extends JavaPlugin implements Listener {
     
     private void hookPlugins() {
     	// Hook LWC
-    	if (mainConfig.EnableLWC)
+    	if (mainConfig.Plugin_LWC_Enabled)
     	{
     		lwcplugin = new LWCPluginHook(this);
     		lwcplugin.HookLWC();
     	}
     	
     	// Hook PlotMe
-    	if (mainConfig.EnablePlotMe)
+    	if (mainConfig.Plugin_PlotMe_Enabled)
     	{
     		plotmeplugin = new PlotMePluginHook(this);
     		plotmeplugin.HookPlotMe();
     	}
     	
     	// Hook Econony
-    	if (mainConfig.EnableVault)
+    	if (mainConfig.Plugin_Vault_Enabled)
     	{
     		vaultplugin = new VaultPluginHook(this);
     		vaultplugin.HookVault();
     	}
     	
     	// Hook GriefPrevention
-    	if (mainConfig.EnableGriefPrevention)
+    	if (mainConfig.Plugin_GriefPrevention_Enabled)
     	{
     		griefpreventionplugin = new GriefPreventionHook(this);
     		griefpreventionplugin.HookGriefPrevention();
     	}
     	
     	// Hook WorldGuard
-    	if (mainConfig.EnableWorldGuard)
+    	if (mainConfig.Plugin_WorldGuard_Enabled)
     	{
     		worldguardplugin = new WorldGuardHook(this);
     		worldguardplugin.HookWorldGuard();
     	}
     	
     	// Hook Essentials
-    	if (mainConfig.EnableEssentials)
+    	if (mainConfig.Plugin_Essentials_Enabled)
     	{
     		essentialsplugin = new EssentialsHook(this);
     		essentialsplugin.HookEssentials();
@@ -182,8 +183,14 @@ public class BanSync extends JavaPlugin implements Listener {
     
     private void loadConfig()
     {
-        mainConfig = new MainConfig(this);
-        mainConfig.load();	
+    	try {
+    		mainConfig = new MainConfig(this);
+    		mainConfig.init();
+    	} catch (Exception ex) {
+    		logger.log(LogLevels.FATAL, "Failed to load config");
+    		logger.log(LogLevels.FATAL, ex.getMessage());
+    		getServer().getPluginManager().disablePlugin(this);
+    	}
     }
     
     public String getTag() {
