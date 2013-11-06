@@ -24,6 +24,7 @@ import net.craftminecraft.bukkit.bansync.plugins.LWCPluginHook;
 import net.craftminecraft.bukkit.bansync.plugins.PlotMePluginHook;
 import net.craftminecraft.bukkit.bansync.plugins.VaultPluginHook;
 import net.craftminecraft.bukkit.bansync.plugins.WorldGuardHook;
+import org.bukkit.event.EventPriority;
 
 public class BanSync extends JavaPlugin implements Listener {
 	public Logger logger = new Logger(this);
@@ -63,7 +64,7 @@ public class BanSync extends JavaPlugin implements Listener {
         return commandManager.dispatch(sender, command, label, args, this);
     }
     
-    @EventHandler
+    @EventHandler (priority = EventPriority.LOW)
     public void onPlayerKicked(PlayerKickEvent event) {
     	Player kickedplayer;
     	kickedplayer = event.getPlayer();

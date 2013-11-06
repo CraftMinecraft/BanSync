@@ -28,7 +28,7 @@ public class WorldGuardHook {
 	}
 	
 	public Boolean HookWorldGuard()
-	{
+	{            
 		Plugin p = bansyncinterface.getServer().getPluginManager().getPlugin("WorldGuard");
 		if (p != null && p instanceof WorldGuardPlugin) {
 			pluginHooked = true;

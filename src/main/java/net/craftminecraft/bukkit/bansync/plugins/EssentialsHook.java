@@ -1,10 +1,5 @@
 package net.craftminecraft.bukkit.bansync.plugins;
 
-import java.util.Iterator;
-import java.util.List;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import net.craftminecraft.bukkit.bansync.BanSync;
@@ -42,31 +37,15 @@ public class EssentialsHook {
 		}
 	}
 	
-	public void ClearEssentials(String playerName)
-	{
-		User user;
-		
-		Player p = Bukkit.getPlayer(playerName);
-		if (p != null) {
-			user = ess.getUser(p);
-		} else {
-			user = ess.getOfflineUser(playerName);
-		}
-		
-		List<String> homes = ess.getUser(user).getHomes();
-		
-		bansyncinterface.logger.log(LogLevels.INFO, "Player has " + homes.size() + " home(s)");
-	
-		for(Iterator<String> i = homes.iterator(); i.hasNext(); )
-		{
-			String home = i.next();
-			try {
-				ess.getUser(user).delHome(home);
-			} catch (Exception e) {
-				bansyncinterface.logger.log(LogLevels.FATAL, e.getMessage());
-			}
-		}
-		
-		//ess.getUser(user).remove();
-	}
+    public void ClearEssentials(String playerName) {
+        User player = null;
+
+        try {
+            player = ess.getOfflineUser(playerName);
+            player.reset();
+        }
+        catch (Exception ex) {
+            
+        }
+    }
 }
